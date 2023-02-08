@@ -15,6 +15,7 @@
 		"type": "git",
 		"url": "git+https://github.com/Gyver17/gv-framework.git"
 	},
+	"author": "Jose Angel Cortez",
 	"keywords": [
 		"gv",
 		"framework",
@@ -27,7 +28,6 @@
 		"app",
 		"api"
 	  ],
-	"author": "Jose Angel Cortez",
 	"license": "ISC",
 	"bugs": {
 		"url": "https://github.com/Gyver17/gv-framework/issues"
