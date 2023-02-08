@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "rootDir": "./src",
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "skipLibCheck": false,
+    "esModuleInterop": true,
+    "declaration": true
+  },
+  "typeRoots": ["./src/@types"],
+  "include": ["src/**/**.ts"],
+  "exclude": ["node_modules"]
+}
