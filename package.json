@@ -4,8 +4,12 @@
 	"description": "Framework to build applications rest api",
 	"main": "dist/index.js",
 	"typings": "dist/index.d.ts",
+	"files": [
+		"dist"
+	],
 	"scripts": {
-		"build": "tsc"
+		"build": "tsc",
+		"prepare": "tsc"
 	},
 	"repository": {
 		"type": "git",
