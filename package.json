@@ -1,6 +1,6 @@
 {
 	"name": "gv-framework",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Framework to build applications rest api",
 	"main": "dist/index.js",
 	"typings": "dist/index.d.ts",
