@@ -20,7 +20,6 @@ Sure! Here's an example of how you could use `GvServer` to create and run a simp
 
 ```tsx
 import { GvServer } from 'gv-framework';
-import express from 'express';
 
 const server = new GvServer();
 

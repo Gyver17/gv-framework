@@ -1,7 +1,5 @@
 # Gv Framework: Getting Started
 
----
-
 ## Introduction
 
 Gv is a Node.js backend framework that has been built and is fully compatible with Typescript. It also allows developers to code in pure Javascript. Under the hood, Gv uses robust HTTP server frameworks such as Express.
