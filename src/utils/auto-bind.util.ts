@@ -1,10 +1,24 @@
 /* eslint-disable @typescript-eslint/ban-types */
+
+/**
+ * Interface representing the prototype of an object.
+ */
 interface IPrototype {
 	[key: string]: Function;
 }
 
+/**
+ * Name of the constructor property.
+ */
 const CONSTRUCTOR = 'constructor';
 
+/**
+ * Automatically binds the methods of an object to the instance of the object.
+ *
+ * @param instance The instance of the object to bind.
+ * @param exclude An array of method names to exclude from binding.
+ * @param proto The prototype of the object to bind.
+ */
 export function autoBind(
 	instance: unknown,
 	exclude?: string[],
@@ -27,6 +41,14 @@ export function autoBind(
 	}
 }
 
+/**
+ * Binds a method to the instance of the object.
+ *
+ * @param name The name of the method to bind.
+ * @param instance The instance of the object to bind.
+ * @param proto The prototype of the object to bind.
+ * @returns The bound function or undefined if no function was bound.
+ */
 function bind(
 	name: string,
 	instance: unknown,
@@ -58,10 +80,22 @@ function bind(
 	}
 }
 
+/**
+ * Checks if an object is a function.
+ *
+ * @param item The object to check.
+ * @returns true if the object is a function, false otherwise.
+ */
 function isFunction(item: unknown): item is Function {
 	return typeof item === 'function';
 }
 
+/**
+ * Checks if an object is a prototype.
+ *
+ * @param value The object to check.
+ * @returns true if the object is a prototype, false otherwise.
+ */
 function isPrototype<T extends object>(value: unknown): value is T {
 	return typeof value === 'object';
 }

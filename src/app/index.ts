@@ -1,6 +1,7 @@
 import express, { Express, Router } from 'express';
 import { RequestHandler, RouteParameters } from 'express-serve-static-core';
 import { GlobalFilterExceptions } from '../exceptions';
+import { BaseGvRouter } from '../interfaces';
 
 export class GvServer {
 	app: Express;
@@ -41,16 +42,18 @@ export class GvServer {
 		this.app.set(setting, val);
 	}
 
-	public loadRoutes(prefix: string, routes: Router[]) {
+	public loadRoutes(prefix: string, routes: BaseGvRouter[]) {
 		for (const route of routes) {
-			this.app.use(prefix, route);
+			if (!route?.router) throw new Error('route invalid');
+
+			this.app.use(prefix, route.router);
 		}
 	}
 
 	public create() {
 		this.middlewares();
 		this.app.use(this.globalFilterExceptions);
-		
+
 		return this.app;
 	}
 }
