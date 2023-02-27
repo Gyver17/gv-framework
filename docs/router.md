@@ -38,7 +38,7 @@ class TaskController {
 		createTask(newTask)
 
 		// Return successful response
-    	success();
+		success();
 	}
 }
 
