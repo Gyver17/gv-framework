@@ -17,7 +17,7 @@ Here's an example using the `notFound` method:
 import { ControllerParams } from 'gv-framework';
 
 function findUserById({ req, reject, success }: ControllerParams) {
-	const id = req.params.id
+  const id = req.params.id
   const user = // find user by id
   if (!user) {
     reject.notFound(`User with id ${id} not found`);

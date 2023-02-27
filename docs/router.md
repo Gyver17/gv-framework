@@ -17,7 +17,7 @@ class TaskController {
 		const tasks = findTasks()
 
 		// Return successful response
-    	success(tasks);
+		success(tasks);
 	}
 
 	findOne({ req, success, reject }: ControllerParams) {
@@ -29,7 +29,7 @@ class TaskController {
 		if(!task) reject.notFound('task not found')
 
 		// Return successful response
-    	success(tasks);
+		success(tasks);
 	}
 
 	create({ req, success }: ControllerParams<{ name: string }>) {
@@ -38,7 +38,7 @@ class TaskController {
 		createTask(newTask)
 
 		// Return successful response
-      	success();
+    	success();
 	}
 }
 
@@ -46,10 +46,10 @@ const taskController = new TaskController();
 const gv = new GvRouter(taskController);
 
 gv.route({
-    path: '/tasks',
-    method: 'get',
+	path: '/tasks',
+	method: 'get',
 	middleware: [customMiddleware],
-    controllerMethod: 'findAll',
+	controllerMethod: 'findAll',
 });
 
 gv.group({
@@ -57,16 +57,16 @@ gv.group({
 	middleware: [customMiddleware],
 	routes: [
 	    {
-	        path: '/:id',
-            method: 'get',
+			path: '/:id',
+			method: 'get',
 			middleware: [otherMiddleware],
-	        controllerMethod: 'findOne',
+			controllerMethod: 'findOne',
 	    },
 	    {
-	        path: '/',
-	        method: 'post',
-	        controllerMethod: 'create',
-	    },
+			path: '/',
+			method: 'post',
+			controllerMethod: 'create',
+		},
 	],
 })
 
