@@ -10,13 +10,28 @@ export class Success {
 		autoBind(this);
 	}
 
-	public response(data: object, statusCode: HttpSuccessStatus = '200') {
+	public response(
+		data?: unknown,
+		statusCode: HttpSuccessStatus = '200',
+		additionalData?: unknown,
+	) {
+		if (typeof data !== 'object' || data === null)
+			throw new Error('Data is not a valid object');
+
+		if (
+			typeof additionalData !== 'object' ||
+			additionalData === null ||
+			Array.isArray(additionalData)
+		)
+			throw new Error('additionalData is not a valid object');
+
 		const code = parseInt(statusCode);
 		this.res.status(code);
 		this.res.json({
-			message: HttpStatus[code],
+			message: HttpStatus[code] || 'OK',
 			status: code,
 			data,
+			...additionalData,
 		});
 	}
 }
