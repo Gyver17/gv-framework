@@ -31,4 +31,4 @@ export * from './validator';
 
 // @Express
 export { Request, Response, NextFunction, json, urlencoded } from 'express';
-export { createServer } from './app';
+export { GvServer } from './app';
