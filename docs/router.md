@@ -105,3 +105,22 @@ You can find more information about the `success` and `reject` params in the fol
 [success](router/success.md)
 
 [reject](router/reject.md)
+
+### `Route Params`
+
+The parameters include:
+
+- `path`: a string representing the URL route for which the route controller is defined.
+- `controllerMethod`: a string representing the name of the controller method that is executed when the route is accessed.
+- `method`: a `Method` object that represents the HTTP method used to access the route (e.g. `GET`, `POST`, `PUT`, etc.).
+- `middleware` (optional): an array of middleware that is executed before the controller method.
+- `validation` (optional): a `BaseValidator` object that is used to validate input data.
+- `disabled` (optional): a boolean indicating whether the route is disabled.
+
+### `Group Params`
+
+The parameters include:
+
+- `middleware` (optional): an array of middleware that is executed before all routes in the group.
+- `prefix` (optional): a string that is added to the beginning of all routes in the group.
+- `routes`: an array of `Routes` objects that describe each route in the group.
