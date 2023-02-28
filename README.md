@@ -25,6 +25,6 @@ Gv offers several pages that allow you to use different features of the framewor
 - [Router](docs/router.md): This page teaches you how to create routes for your application.
 - [Validator](docs/validator.md): This page teaches you how to validate data that enters your application.
 - [Auth](docs/auth.md): This page teaches you how to authenticate users of your application.
-- [Exceptions](docs/exceptions.md.md): This page teaches you how to handle exceptions in your application.
+- [Exceptions](docs/exceptions.md): This page teaches you how to handle exceptions in your application.
 - [Utils](docs/utils.md.md): This page teaches you how to use the utilities that Gv Framework offers.
 - [Middleware](docs/middleware.md.md): This page teaches you how to create middlewares for your application.
