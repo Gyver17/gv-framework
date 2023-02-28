@@ -1,6 +1,6 @@
 {
 	"name": "gv-framework",
-	"version": "1.0.5",
+	"version": "2.0.0",
 	"description": "Framework to build applications rest api",
 	"main": "dist/index.js",
 	"typings": "dist/index.d.ts",
@@ -32,7 +32,10 @@
 		"restful",
 		"router",
 		"app",
-		"api"
+		"api",
+		"exceptions",
+		"validation",
+		"auth"
 	],
 	"license": "ISC",
 	"bugs": {
@@ -46,8 +49,8 @@
 		"@types/node": "18.14.2",
 		"@types/uuid": "9.0.1",
 		"@types/validator": "13.7.12",
-		"@typescript-eslint/eslint-plugin": "5.53.0",
-		"@typescript-eslint/parser": "5.53.0",
+		"@typescript-eslint/eslint-plugin": "5.54.0",
+		"@typescript-eslint/parser": "5.54.0",
 		"eslint": "8.35.0",
 		"eslint-config-prettier": "8.6.0",
 		"eslint-plugin-prettier": "4.2.1",

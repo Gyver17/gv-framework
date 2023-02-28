@@ -14,7 +14,6 @@ To install Gv, you can use npm. Simply run the following command:
 
 ```
 npm i gv-framework
-
 ```
 
 ## Pages
