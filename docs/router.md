@@ -32,7 +32,7 @@ class TaskController {
 		success(tasks);
 	}
 
-	create({ req, success }: ControllerParams<{ name: string }>) {
+	create({ req, success }: ControllerParams) {
 		// Logic to create task
 		const newTask = req.body
 		createTask(newTask)
