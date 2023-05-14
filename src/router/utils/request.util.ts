@@ -1,6 +1,7 @@
 import { Request as ExpressRequest } from 'express';
 import { autoBind } from '../../utils';
 import { GvRequest as GvRequestInterface } from '../../interfaces';
+import { GvValidator } from '../../validator';
 
 export class GvRequest {
 	private readonly request;
@@ -97,6 +98,7 @@ export class GvRequest {
 		this.request.only = this.only;
 		this.request.all = this.all;
 		this.request.fields = this.fields;
+		this.request.validate = new GvValidator(this.request).validate;
 
 		return this.request;
 	}

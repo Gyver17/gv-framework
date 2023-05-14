@@ -1,4 +1,5 @@
 import { Request as ExpressRequest } from 'express';
+import { ZodType } from 'zod';
 
 export interface GvRequest extends ExpressRequest {
 	input: (field: string) => unknown;
@@ -7,4 +8,5 @@ export interface GvRequest extends ExpressRequest {
 	) => T extends undefined ? Record<string, unknown> : T;
 	all: () => Record<string, unknown>;
 	fields: () => string[];
+	validate<T>(schema: ZodType<T>): T;
 }

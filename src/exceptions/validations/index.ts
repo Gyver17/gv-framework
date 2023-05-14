@@ -1,4 +1,4 @@
-import { ValidationError } from '@apideck/better-ajv-errors';
+import { ZodIssue } from 'zod';
 import { HttpStatus } from '../../enums';
 
 /**
@@ -11,7 +11,7 @@ export class ValidationException {
 	 * Constructor for the HttpException class.
 	 * @param errors Error validations.
 	 */
-	constructor(private readonly errors: ValidationError[]) {
+	constructor(private readonly errors: ZodIssue[]) {
 		this.statusCode = 422;
 	}
 
@@ -22,28 +22,15 @@ export class ValidationException {
 	public toJSON() {
 		return this.errors.map((error) => {
 			const details = error.message;
-			const type = error.context.errorType;
-			const suggestion = error.suggestion;
+			const type = error.code;
 			const path = error.path;
-
-			if (type === 'required') {
-				return {
-					status: this.statusCode,
-					name: HttpStatus[this.statusCode],
-					details,
-					type,
-					suggestion,
-					field: details.split(' ')[5]?.slice(1, -1) || path,
-				};
-			}
 
 			return {
 				status: this.statusCode,
 				name: HttpStatus[this.statusCode],
 				details,
 				type,
-				suggestion,
-				field: error.path.split('.')[1],
+				field: path[0],
 			};
 		});
 	}

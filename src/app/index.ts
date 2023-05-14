@@ -1,4 +1,5 @@
-import express, { Express, Router } from 'express';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import express, { Express } from 'express';
 import { RequestHandler, RouteParameters } from 'express-serve-static-core';
 import { GlobalFilterExceptions } from '../exceptions';
 import { BaseGvRouter } from '../interfaces';

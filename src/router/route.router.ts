@@ -10,7 +10,6 @@ export function route({
 	middleware = [],
 	disabled,
 }: Route): Router {
-	// const request = controller;
 
 	return router[method](
 		path,

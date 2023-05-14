@@ -8,7 +8,6 @@ export * from './exceptions';
 export { GvSessionServices, CreateSessionParams } from './interfaces/auth';
 export * from './interfaces/controllers';
 export * from './interfaces/middleware';
-export * from './interfaces/validator';
 
 // @Routes
 export { GvRouter } from './router';

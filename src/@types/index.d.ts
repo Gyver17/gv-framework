@@ -7,6 +7,7 @@ declare namespace Express {
 		) => T extends undefined ? Record<string, unknown> : T;
 		all: () => Record<string, unknown>;
 		fields: () => string[];
+		validate: any
 	}
 
 	export interface Response {
