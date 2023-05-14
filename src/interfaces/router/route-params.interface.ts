@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { BaseMiddleware, BaseValidator } from '../../interfaces';
+import { BaseMiddleware } from '../../interfaces';
 import { Controller, Method } from '../../types';
 
 export interface RouteParams {
@@ -8,7 +8,6 @@ export interface RouteParams {
 	controller: Controller;
 	method: Method;
 	middleware?: BaseMiddleware[];
-	validation?: BaseValidator;
 	disabled?: boolean;
 }
 

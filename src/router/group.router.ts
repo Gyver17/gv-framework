@@ -13,7 +13,6 @@ export function group({
 			path,
 			middleware: routeMiddleware = [],
 			method,
-			validation,
 			controller,
 		}) => {
 			const routePath = prefix === '/' ? path : prefix + path;
@@ -22,7 +21,6 @@ export function group({
 				path: routePath,
 				middleware: [...middleware, ...routeMiddleware],
 				method,
-				validation,
 				router,
 				controller,
 			});

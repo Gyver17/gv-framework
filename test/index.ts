@@ -1,10 +1,10 @@
-import { createServer, GvRouter } from '../dist';
+import { GvServer, GvRouter } from '../dist';
 
-const app = createServer();
+const app = new GvServer();
 
-app.listen(5000, () => {
-	console.log('Server on port', 5000);
-});
+// app.(5000, () => {
+// 	console.log('Server on port', 5000);
+// });
 
 const router = new GvRouter();
 
@@ -22,8 +22,10 @@ router.group({
 		{
 			path: '/test',
 			method: 'get',
-			controller: async ({ res }) => {
-				res.send('Hello world');
+			controller: async ({ res, req }) => {
+				const data = req.only(['name', 'age']);
+
+				res.success('Hello world');
 			},
 		},
 	],

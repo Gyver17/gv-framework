@@ -1,12 +1,7 @@
-import { Request, Response } from 'express';
-import { HttpSuccessStatus } from '../../types';
-import { Reject } from '../../router/utils';
+import { GvRequest, GvResponse } from '../router';
 
-export interface ControllerParams<T = undefined> {
-	req: Request;
-	res: Response;
-	success(data: object, statusCode?: HttpSuccessStatus): void;
-	reject: Reject;
-	validate?: T extends undefined ? null : T;
+export interface ControllerParams {
+	req: GvRequest;
+	res: GvResponse;
 	ownerId?: number;
 }
