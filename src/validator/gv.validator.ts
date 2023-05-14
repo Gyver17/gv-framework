@@ -1,6 +1,6 @@
 // @Libraries
 import Ajv, { JSONSchemaType } from 'ajv';
-import addFormats from 'ajv-formats'
+import addFormats from 'ajv-formats';
 import { betterAjvErrors } from '@apideck/better-ajv-errors';
 import type { JSONSchema6 } from 'json-schema';
 
@@ -33,7 +33,7 @@ export class GvValidator<T> implements BaseValidator {
 				errors: validate.errors,
 				data,
 				schema,
-				basePath: 'request'
+				basePath: 'request',
 			});
 
 			throw new ValidationException(errors);

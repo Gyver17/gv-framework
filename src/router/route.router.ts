@@ -1,19 +1,17 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import { Route } from '../interfaces';
-import { Controller } from '../types';
 import { wrapperMiddleware, Success, Reject } from './utils';
 
-export function route<T>({
+export function route({
 	path,
 	method,
-	controllerMethod,
 	controller,
 	router,
 	middleware = [],
 	validation,
 	disabled,
-}: Route<T>): Router {
-	const request = controller[controllerMethod] as Controller;
+}: Route): Router {
+	const request = controller;
 
 	return router[method](
 		path,

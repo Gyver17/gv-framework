@@ -1,17 +1,18 @@
 import { Router } from 'express';
 import { BaseMiddleware, BaseValidator } from '../../interfaces';
-import { ExtractMethods, Method } from '../../types';
+import { Controller, Method } from '../../types';
 
-export interface RouteParams<T> {
+export interface RouteParams {
 	path: string;
-	controllerMethod: keyof ExtractMethods<T>;
+	// controllerMethod: keyof ExtractMethods<T>;
+	controller: Controller;
 	method: Method;
 	middleware?: BaseMiddleware[];
 	validation?: BaseValidator;
 	disabled?: boolean;
 }
 
-export interface Route<T> extends RouteParams<T> {
+export interface Route extends RouteParams {
 	router: Router;
-	controller: T;
+	controller: Controller;
 }

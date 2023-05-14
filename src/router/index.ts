@@ -4,31 +4,27 @@ import { GroupParams, BaseGvRouter, RouteParams } from '../interfaces';
 import { group } from './group.router';
 import { route } from './route.router';
 
-export class GvRouter<T> implements BaseGvRouter<T> {
+export class GvRouter implements BaseGvRouter {
 	readonly methods: ['post', 'get', 'put', 'patch', 'delete'];
 	public readonly router: Router;
-	private readonly controller: T;
 
-	constructor(controller: T) {
-		this.controller = controller;
+	constructor() {
 		this.router = Router();
-		this.methods = ['post', 'get', 'put', 'patch', 'delete']
+		this.methods = ['post', 'get', 'put', 'patch', 'delete'];
 		autoBind(this);
 	}
 
-	public route(params: RouteParams<T>) {
+	public route(params: RouteParams) {
 		return route({
 			...params,
 			router: this.router,
-			controller: this.controller,
 		});
 	}
 
-	public group(params: GroupParams<T>): Router {
-		return group<T>({
+	public group(params: GroupParams): Router {
+		return group({
 			...params,
 			router: this.router,
-			controller: this.controller,
 		});
 	}
 }

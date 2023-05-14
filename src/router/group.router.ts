@@ -2,20 +2,19 @@ import { Router } from 'express';
 import { Group } from '../interfaces';
 import { route } from './route.router';
 
-export function group<T>({
+export function group({
 	middleware = [],
 	prefix = '/',
 	routes,
 	router,
-	controller,
-}: Group<T>): Router {
+}: Group): Router {
 	routes.map(
 		({
 			path,
 			middleware: routeMiddleware = [],
 			method,
-			controllerMethod,
 			validation,
+			controller,
 		}) => {
 			const routePath = prefix === '/' ? path : prefix + path;
 
@@ -23,7 +22,6 @@ export function group<T>({
 				path: routePath,
 				middleware: [...middleware, ...routeMiddleware],
 				method,
-				controllerMethod,
 				validation,
 				router,
 				controller,

@@ -2,13 +2,13 @@ import { Router } from 'express';
 import { BaseMiddleware } from '../middleware';
 import { RouteParams } from './route-params.interface';
 
-export interface GroupParams<T> {
+export interface GroupParams {
 	middleware?: BaseMiddleware[];
 	prefix?: string;
-	routes: RouteParams<T>[];
+	routes: RouteParams[];
 }
 
-export interface Group<T> extends GroupParams<T> {
+export interface Group extends GroupParams {
 	router: Router;
-	controller: T;
+	// controller: T;
 }
