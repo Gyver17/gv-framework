@@ -1,7 +1,15 @@
+// @Libraries
 import { Request as ExpressRequest } from 'express';
+import { ZodIssue, ZodType, z } from 'zod';
+
+// @Utils
 import { autoBind } from '../../utils';
+
+// @Interfaces
 import { GvRequest as GvRequestInterface } from '../../interfaces';
-import { GvValidator } from '../../validator';
+
+// @Exceptions
+import { ValidationException } from '../../exceptions';
 
 export class GvRequest {
 	private readonly request;
@@ -93,12 +101,38 @@ export class GvRequest {
 		return this.only(this.fields());
 	}
 
+	private validate<T>(
+		schema: ZodType<T>,
+		getData?: 'body' | 'query' | 'all',
+	) {
+		type typeData = z.infer<typeof schema>;
+		const typeGet = getData ?? 'body';
+
+		let data = {};
+		if (typeGet === 'body') {
+			data = this.request.body;
+		} else if (typeGet === 'query') {
+			data = this.request.query;
+		} else {
+			data = this.all();
+		}
+
+		const validate = schema.safeParse(data);
+
+		if (!validate.success) {
+			const issues = validate.error.issues as ZodIssue[];
+			throw new ValidationException(issues);
+		}
+
+		return data as typeData;
+	}
+
 	get(): GvRequestInterface {
 		this.request.input = this.input;
 		this.request.only = this.only;
 		this.request.all = this.all;
 		this.request.fields = this.fields;
-		this.request.validate = new GvValidator(this.request).validate;
+		this.request.validate = this.validate;
 
 		return this.request;
 	}

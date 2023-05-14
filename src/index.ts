@@ -25,9 +25,6 @@ export {
 // @Utils
 export * from './utils';
 
-// @Validator
-export * from './validator';
-
 // @Express
 export { Request, Response, NextFunction } from 'express';
 
