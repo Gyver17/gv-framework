@@ -1,9 +1,7 @@
-import { Request, Response } from 'express';
-import { Reject } from '../../router/utils';
+import { GvRequest, GvResponse } from '../router';
 
 export interface MiddlewareParams {
-	req: Request;
-	res: Response;
-	reject: Reject;
+	req: GvRequest;
+	res: GvResponse;
 	ownerId?: number;
 }
