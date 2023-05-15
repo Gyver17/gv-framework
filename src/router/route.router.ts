@@ -3,7 +3,7 @@ import { Route } from '../interfaces';
 import { wrapperMiddleware, GvRequest, GvResponse } from './utils';
 
 export function route({
-	path,
+	path = '/',
 	method,
 	controller,
 	router,

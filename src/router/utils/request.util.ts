@@ -31,8 +31,9 @@ export class GvRequest {
 		}
 	}
 
-	private isUndefined(value: unknown) {
-		if (value == 'undefined' || value === 'undefined') return undefined;
+	private isUndefined(value: unknown, defaultValue?: unknown) {
+		if (value == 'undefined' || value === 'undefined')
+			return defaultValue ?? undefined;
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -43,7 +44,17 @@ export class GvRequest {
 	}
 
 	private isArray(value: unknown) {
-		if (Array.isArray(value)) return value;
+		try {
+			let arr;
+			if (typeof value === 'string') {
+				arr = JSON.parse(value);
+			} else {
+				arr = value;
+			}
+			if (Array.isArray(arr)) return arr;
+		} catch {
+			return undefined;
+		}
 	}
 
 	private isString(value: unknown) {
@@ -75,26 +86,43 @@ export class GvRequest {
 		return object as T extends undefined ? Record<string, unknown> : T;
 	}
 
-	private input(field: string) {
+	private input<T = undefined>(
+		field: string,
+		defaultValue?: T extends undefined ? unknown : T,
+	) {
 		const value: unknown =
-			this.request.body[field] ?? this.request.query[field];
+			(this.request.body && this.request.body[field]) ??
+			this.request?.query[field] ??
+			this.request?.params[field] ??
+			undefined;
 
-		return (
-			this.isUndefined(value) ||
-			this.isBoolean(value) ||
-			this.isNumber(value) ||
-			this.isArray(value) ||
-			this.isDate(value) ||
-			this.isString(value) ||
-			value
-		);
+		return (this.isUndefined(value, defaultValue) ??
+			this.isBoolean(value) ??
+			this.isNumber(value) ??
+			this.isArray(value) ??
+			this.isDate(value) ??
+			this.isString(value) ??
+			value) as T extends undefined ? unknown : T;
 	}
 
 	private fields() {
 		return [
 			...Object.keys(this.request.body),
 			...Object.keys(this.request.query),
+			...Object.keys(this.request.params),
 		];
+	}
+
+	private query() {
+		const fields = Object.keys(this.request.query);
+
+		return this.only(fields);
+	}
+
+	private params() {
+		const fields = Object.keys(this.request.params);
+
+		return this.only(fields);
 	}
 
 	private all() {
@@ -103,7 +131,7 @@ export class GvRequest {
 
 	private validate<T>(
 		schema: ZodType<T>,
-		getData?: 'body' | 'query' | 'all',
+		getData?: 'body' | 'query' | 'params' | 'all',
 	) {
 		type typeData = z.infer<typeof schema>;
 		const typeGet = getData ?? 'body';
@@ -112,7 +140,9 @@ export class GvRequest {
 		if (typeGet === 'body') {
 			data = this.request.body;
 		} else if (typeGet === 'query') {
-			data = this.request.query;
+			data = this.query();
+		} else if (typeGet === 'params') {
+			data = this.params();
 		} else {
 			data = this.all();
 		}
@@ -121,7 +151,7 @@ export class GvRequest {
 
 		if (!validate.success) {
 			const issues = validate.error.issues as ZodIssue[];
-			throw new ValidationException(issues);
+			throw new ValidationException(issues, typeGet);
 		}
 
 		return data as typeData;

@@ -106,13 +106,14 @@ export class GvResponse {
 		statusCode: HttpSuccessStatus = '200',
 		additionalData?: unknown,
 	) {
+		const _additionalData = additionalData || {};
 		if (typeof data !== 'object' || data === null)
 			throw new Error('Data is not a valid object');
 
 		if (
-			typeof additionalData !== 'object' ||
-			additionalData === null ||
-			Array.isArray(additionalData)
+			typeof _additionalData !== 'object' ||
+			_additionalData === null ||
+			Array.isArray(_additionalData)
 		)
 			throw new Error('additionalData is not a valid object');
 
@@ -122,7 +123,7 @@ export class GvResponse {
 			message: HttpStatus[code] || 'OK',
 			status: code,
 			data,
-			...additionalData,
+			..._additionalData,
 		});
 	}
 

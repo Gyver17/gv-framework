@@ -11,7 +11,10 @@ export class ValidationException {
 	 * Constructor for the HttpException class.
 	 * @param errors Error validations.
 	 */
-	constructor(private readonly errors: ZodIssue[]) {
+	constructor(
+		private readonly errors: ZodIssue[],
+		private readonly request: string,
+	) {
 		this.statusCode = 422;
 	}
 
@@ -31,6 +34,7 @@ export class ValidationException {
 				details,
 				type,
 				field: path[0],
+				request: this.request,
 			};
 		});
 	}

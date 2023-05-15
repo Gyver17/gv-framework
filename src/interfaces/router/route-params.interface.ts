@@ -3,8 +3,7 @@ import { BaseMiddleware } from '../../interfaces';
 import { Controller, Method } from '../../types';
 
 export interface RouteParams {
-	path: string;
-	// controllerMethod: keyof ExtractMethods<T>;
+	path?: string;
 	controller: Controller;
 	method: Method;
 	middleware?: BaseMiddleware[];

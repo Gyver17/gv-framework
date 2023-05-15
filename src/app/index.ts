@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import express, { Express } from 'express';
+import express, { Express, json, urlencoded } from 'express';
 import { RequestHandler, RouteParameters } from 'express-serve-static-core';
 import { GlobalFilterExceptions } from '../exceptions';
 import { BaseGvRouter } from '../interfaces';
+import { autoBind } from '../utils';
 
 export class GvServer {
 	app: Express;
@@ -11,11 +12,13 @@ export class GvServer {
 	constructor() {
 		this.app = express();
 		this.globalFilterExceptions = GlobalFilterExceptions;
+		this.middlewares();
+		autoBind(this);
 	}
 
 	private middlewares() {
-		this.app.use(express.json());
-		this.app.use(express.urlencoded({ extended: true }));
+		this.app.use(urlencoded({ extended: true }));
+		this.app.use(json());
 	}
 
 	public useGlobalFilters(filter: typeof GlobalFilterExceptions) {
@@ -52,7 +55,6 @@ export class GvServer {
 	}
 
 	public create() {
-		this.middlewares();
 		this.app.use(this.globalFilterExceptions);
 
 		return this.app;

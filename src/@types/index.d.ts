@@ -1,13 +1,15 @@
 declare namespace Express {
 	export interface Request {
 		ownerId?: number;
-		input: (field: string) => unknown;
+		input: <T = undefined>(
+			field: string,
+		) => T extends undefined ? unknown : T;
 		only: <T = undefined>(
 			fields: string[],
 		) => T extends undefined ? Record<string, unknown> : T;
 		all: () => Record<string, unknown>;
 		fields: () => string[];
-		validate: any
+		validate: any;
 	}
 
 	export interface Response {
@@ -18,8 +20,8 @@ declare namespace Express {
 		conflict(message: string): void;
 		gone(message: string): void;
 		payloadTooLarge(message: string): void;
-		unprocessableEntity(message: string): void
-		unprocessableEntity(message: string): void
+		unprocessableEntity(message: string): void;
+		unprocessableEntity(message: string): void;
 		success(
 			data?: unknown,
 			statusCode?: HttpSuccessStatus,
