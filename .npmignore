@@ -12,3 +12,5 @@ tslint.json
 tsconfig.json
 .eslintrc.json
 .prettierrc
+node_modules
+test
